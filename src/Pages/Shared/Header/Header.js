@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import LinkButton from '../LinkButton/LinkButton';
 
 const Header = () => {
   return (
-    <nav className="py-4 px-2 border ">
+    <nav className="py-4 px-2 border fixed top-0 w-full bg-white">
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
           <h2 className="text-4xl font-bold">
@@ -16,12 +17,8 @@ const Header = () => {
             </li>
           </ul>
           <div className="flex gap-2">
-            <Link to="/login" className="bg-blue-500 px-4 py-2 rounded text-white">
-              Sign In
-            </Link>
-            <Link to="/login" className="bg-blue-500 px-4 py-2 rounded text-white">
-              Sign Up
-            </Link>
+            <LinkButton to="/signin">Sign In</LinkButton>
+            <LinkButton to="/signup">Sign Up</LinkButton>
           </div>
         </div>
       </div>
