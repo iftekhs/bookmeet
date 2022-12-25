@@ -7,10 +7,13 @@ const Header = () => {
     <nav className="py-4 px-2 border fixed top-0 w-full bg-white">
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
-          <h2 className="text-4xl font-bold">
-            Book
-            <span className="text-blue-500">Meet</span>
-          </h2>
+          <Link to="/">
+            <h2 className="text-4xl font-bold">
+              Book
+              <span className="text-blue-500">Meet</span>
+            </h2>
+          </Link>
+
           <ul className="flex gap-2 font-semibold">
             <li>
               <Link to="/">Home</Link>

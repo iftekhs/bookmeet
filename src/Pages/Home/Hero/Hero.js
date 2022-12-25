@@ -1,6 +1,5 @@
 import React from 'react';
 import banner from '../../../images/banner.jpg';
-import DefaultBtn from '../../Shared/DefaultBtn/DefaultBtn';
 import './Hero.css';
 
 const Hero = () => {
@@ -18,7 +17,9 @@ const Hero = () => {
               quae ducimus suscipit aliquam vel aperiam?
             </p>
             <div className="mt-5">
-              <DefaultBtn>Get Started</DefaultBtn>
+              <button className="bg-blue-500 px-4 py-2 rounded text-white hover:bg-blue-600 transition-all">
+                Get Started
+              </button>
             </div>
           </div>
           <img className="lg:w-1/2 rounded" src={banner} alt="" />
