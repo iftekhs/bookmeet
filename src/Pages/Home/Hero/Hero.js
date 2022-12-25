@@ -12,9 +12,9 @@ const Hero = () => {
               BookMeet - A meeting scheduling platform to manage your meetings smoothly
             </h1>
             <p className="mt-5 text-cgray">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci eaque nemo,
-              aliquam, amet odit rem ipsum minus alias ratione, voluptatum doloribus? Ex iure iste
-              quae ducimus suscipit aliquam vel aperiam?
+              BookMeet is a meetings management platform that helps you manage all your meetings in
+              a simplified way. We have a user dashboard that will help you manage your meetings for
+              example cancling meeting, rescheduling meeting etc.
             </p>
             <div className="mt-5">
               <button className="bg-blue-500 px-4 py-2 rounded text-white hover:bg-blue-600 transition-all">
