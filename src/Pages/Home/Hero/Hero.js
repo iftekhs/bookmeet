@@ -5,7 +5,7 @@ import './Hero.css';
 
 const Hero = () => {
   return (
-    <section className="pt-40">
+    <section className="pt-20 lg:pt-48 text-center lg:text-left">
       <div className="container mx-auto">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-5">
           <div>
