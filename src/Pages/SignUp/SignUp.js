@@ -1,12 +1,66 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { GoogleAuthProvider } from 'firebase/auth';
 import { FaGoogle } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const SignUp = () => {
+  const [error, setError] = useState(null);
+  const { createUser, providerLogin, trigger, setTrigger, updateUserProfile } =
+    useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  //    Providers
+  // const googleProvider = new GoogleAuthProvider();
+
+  const handleUpdateUserProfile = (name, photoURL) => {
+    const profile = {
+      displayName: name,
+      photoURL: photoURL,
+    };
+    updateUserProfile(profile)
+      .then(() => {
+        setTrigger(!trigger);
+        navigate('/');
+      })
+      .catch((error) => console.error(error))
+      .finally(() => {});
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setError(null);
+    const form = event.target;
+    const name = form.name.value;
+    const photoURL = form.photoURL.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    createUser(email, password)
+      .then((result) => {
+        form.reset();
+        handleUpdateUserProfile(name, photoURL);
+      })
+      .catch((e) => setError(e.message));
+  };
+
+  // const handleGoogleSignIn = () => {
+  //   providerLogin(googleProvider)
+  //     .then((result) => {
+  //       const user = result.user;
+  //       const currentUser = {
+  //         email: user.email,
+  //       };
+  //     })
+  //     .catch(console.error);
+  // };
+
   return (
     <section className="bg-gradient-to-tr from-blue-400 to-blue-500 px-2">
       <div className="mh-100  flex items-center justify-center">
         <div className="auth-form bg-white flex items-center justify-center flex-col w-full rounded p-4 max-w-2xl">
-          <form>
+          <form onSubmit={handleSubmit}>
             <h2 className="text-4xl text-center font-bold">
               Book
               <span className="text-blue-500">Meet</span>
@@ -54,6 +108,7 @@ const SignUp = () => {
                 className="p-2 mt-1 rounded focus:border-blue-00 w-full outline-none border"
               />
             </div>
+            <p className="text-rose-500 my-5">{error}</p>
             <button className="mt-5 bg-blue-500 px-4 py-2 rounded text-white hover:bg-blue-600 transition-all">
               Sign Up
             </button>
