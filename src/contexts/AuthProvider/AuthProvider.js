@@ -48,6 +48,8 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (localStorage.getItem('token-' + process.env.REACT_APP_NAME)) {
         setUser(currentUser);
+      } else {
+        logOut();
       }
       setLoading(false);
     });
