@@ -3,6 +3,8 @@ import { GoogleAuthProvider } from 'firebase/auth';
 import { FaGoogle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import { cl } from '../../Helpers/Helpers';
+import setAuthToken from '../../api/Auth/Auth';
 
 const SignUp = () => {
   const [error, setError] = useState(null);
@@ -14,7 +16,7 @@ const SignUp = () => {
   //    Providers
   const googleProvider = new GoogleAuthProvider();
 
-  const handleUpdateUserProfile = (name, photoURL) => {
+  const handleUpdateUserProfile = (name, email, photoURL) => {
     const profile = {
       displayName: name,
       photoURL: photoURL,
@@ -22,7 +24,7 @@ const SignUp = () => {
     updateUserProfile(profile)
       .then(() => {
         setTrigger(!trigger);
-        navigate('/');
+        saveUser(name, email);
       })
       .catch((error) => console.error(error))
       .finally(() => {});
@@ -40,7 +42,7 @@ const SignUp = () => {
     createUser(email, password)
       .then((result) => {
         form.reset();
-        handleUpdateUserProfile(name, photoURL);
+        handleUpdateUserProfile(name, email, photoURL);
       })
       .catch((e) => setError(e.message));
   };
@@ -48,13 +50,34 @@ const SignUp = () => {
   const handleGoogleSignIn = () => {
     providerLogin(googleProvider)
       .then((result) => {
-        // const user = result.user;
-        // const currentUser = {
-        //   email: user.email,
-        // };
-        navigate('/');
+        const user = result.user;
+        saveUser(user.displayName, user.email);
       })
       .catch(console.error);
+  };
+
+  const saveUser = (name, email) => {
+    const user = { name, email };
+    const currentUser = {
+      email,
+    };
+    fetch(cl('/users'), {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then(() => {
+        setAuthToken(currentUser)
+          .then((data) => {
+            if (data.accessToken) {
+              navigate('/');
+            }
+          })
+          .catch(console.error);
+      });
   };
 
   return (
