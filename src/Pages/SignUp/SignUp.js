@@ -12,7 +12,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   //    Providers
-  // const googleProvider = new GoogleAuthProvider();
+  const googleProvider = new GoogleAuthProvider();
 
   const handleUpdateUserProfile = (name, photoURL) => {
     const profile = {
@@ -45,16 +45,17 @@ const SignUp = () => {
       .catch((e) => setError(e.message));
   };
 
-  // const handleGoogleSignIn = () => {
-  //   providerLogin(googleProvider)
-  //     .then((result) => {
-  //       const user = result.user;
-  //       const currentUser = {
-  //         email: user.email,
-  //       };
-  //     })
-  //     .catch(console.error);
-  // };
+  const handleGoogleSignIn = () => {
+    providerLogin(googleProvider)
+      .then((result) => {
+        // const user = result.user;
+        // const currentUser = {
+        //   email: user.email,
+        // };
+        navigate('/');
+      })
+      .catch(console.error);
+  };
 
   return (
     <section className="bg-gradient-to-tr from-blue-400 to-blue-500 px-2">
@@ -113,7 +114,9 @@ const SignUp = () => {
               Sign Up
             </button>
 
-            <button className="flex items-center justify-center gap-2 mt-5 p-2 py-3 rounded border w-full transition-all hover:bg-gray-100">
+            <button
+              onClick={handleGoogleSignIn}
+              className="flex items-center justify-center gap-2 mt-5 p-2 py-3 rounded border w-full transition-all hover:bg-gray-100">
               <FaGoogle></FaGoogle>
               Sign In using Google
             </button>

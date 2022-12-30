@@ -40,10 +40,11 @@ const SignIn = () => {
   const handleGoogleSignIn = () => {
     providerLogin(googleProvider)
       .then((result) => {
-        const user = result.user;
-        const currentUser = {
-          email: user.email,
-        };
+        // const user = result.user;
+        // const currentUser = {
+        //   email: user.email,
+        // };
+        navigate(from, { replace: true });
       })
       .catch(console.error);
   };
@@ -83,7 +84,9 @@ const SignIn = () => {
               Sign In
             </button>
 
-            <button className="flex items-center justify-center gap-2 mt-5 p-2 py-3 rounded border w-full transition-all hover:bg-gray-100">
+            <button
+              onClick={handleGoogleSignIn}
+              className="flex items-center justify-center gap-2 mt-5 p-2 py-3 rounded border w-full transition-all hover:bg-gray-100">
               <FaGoogle></FaGoogle>
               Sign In using Google
             </button>

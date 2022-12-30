@@ -6,7 +6,7 @@ import Avatar from '../../../images/avatar.svg';
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
-
+  console.log(user);
   return (
     <nav className="py-4 px-2 border fixed top-0 w-full bg-white">
       <div className="container mx-auto">
