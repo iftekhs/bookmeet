@@ -3,8 +3,8 @@ import { GoogleAuthProvider } from 'firebase/auth';
 import { FaGoogle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
-import { cl } from '../../Helpers/Helpers';
 import setAuthToken from '../../api/Auth/Auth';
+import { cl } from '../../Helpers/Helpers';
 
 const SignUp = () => {
   const [error, setError] = useState(null);

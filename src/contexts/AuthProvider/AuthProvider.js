@@ -36,7 +36,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const logOut = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('token-' + process.env.REACT_APP_NAME);
     return signOut(auth);
   };
 
@@ -46,10 +46,11 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      if (localStorage.getItem('token-' + process.env.REACT_APP_NAME)) {
+        setUser(currentUser);
+      }
       setLoading(false);
     });
-
     return () => {
       return unsubscribe();
     };
