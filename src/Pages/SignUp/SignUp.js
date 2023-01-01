@@ -25,7 +25,7 @@ const SignUp = () => {
     };
     updateUserProfile(profile)
       .then(() => {
-        saveUser(name, email);
+        saveUser(name, email, photoURL);
       })
       .catch((error) => console.error(error))
       .finally(() => {});
@@ -51,16 +51,14 @@ const SignUp = () => {
     providerLogin(googleProvider)
       .then((result) => {
         const user = result.user;
-        saveUser(user.displayName, user.email);
+        saveUser(user.displayName, user.email, user.photoURL);
       })
       .catch(console.error);
   };
 
-  const saveUser = (name, email) => {
-    const user = { name, email };
-    const currentUser = {
-      email,
-    };
+  const saveUser = (name, email, photoURL) => {
+    const user = { name, email, photoURL };
+
     fetch(cl('/users'), {
       method: 'POST',
       headers: {
@@ -70,7 +68,9 @@ const SignUp = () => {
     })
       .then((res) => res.json())
       .then(() => {
-        setAuthToken(currentUser)
+        setAuthToken({
+          email,
+        })
           .then((data) => {
             formRef.current.reset();
             setTrigger(!trigger);

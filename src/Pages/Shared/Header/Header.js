@@ -24,11 +24,12 @@ const Header = () => {
             <li className="hover:text-blue-400 transition-all">
               <Link to="/">Home</Link>
             </li>
-            {user && user.uid && userRole === 'admin' ? (
+            {user && user.uid && userRole === 'admin' && (
               <li className="hover:text-blue-400 transition-all">
                 <Link to="/admin/dashboard">Dashboard</Link>
               </li>
-            ) : (
+            )}
+            {user && user.uid && userRole === 'user' && (
               <li className="hover:text-blue-400 transition-all">
                 <Link to="/my/dashboard">Dashboard</Link>
               </li>

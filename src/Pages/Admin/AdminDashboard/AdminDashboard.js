@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { cl } from '../../../Helpers/Helpers';
+import { cl, config } from '../../../Helpers/Helpers';
 
 const AdminDashboard = () => {
   const [totalUsers, setTotalUsers] = useState(0);
@@ -10,11 +10,6 @@ const AdminDashboard = () => {
 
   // ------------------------ Get total users count -----------------------------------
   useEffect(() => {
-    const config = {
-      headers: {
-        authorization: `Bearer ` + localStorage.getItem('token-' + process.env.REACT_APP_NAME),
-      },
-    };
     axios.get(cl('/users/count'), config).then((data) => setTotalUsers(data.data.count));
   }, []);
   // ------------------------ Get total users count -----------------------------------

@@ -54,13 +54,13 @@ const SignIn = () => {
     providerLogin(googleProvider)
       .then((result) => {
         const user = result.user;
-        saveUser(user.displayName, user.email, 'user');
+        saveUser(user.displayName, user.email, user.photoURL);
       })
       .catch(console.error);
   };
 
-  const saveUser = (name, email) => {
-    const user = { name, email };
+  const saveUser = (name, email, photoURL) => {
+    const user = { name, email, photoURL };
     const currentUser = {
       email,
     };
