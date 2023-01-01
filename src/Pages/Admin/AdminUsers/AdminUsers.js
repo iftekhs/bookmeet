@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import swal from 'sweetalert';
 import { cl, config } from '../../../Helpers/Helpers';
 
 const AdminUsers = () => {
@@ -10,8 +11,37 @@ const AdminUsers = () => {
     const tr = button.parentNode.parentNode;
     tr.classList.add('opacity-50');
     button.disabled = true;
-
-    
+    swal({
+      title: 'Are you sure?',
+      text: 'Once deleted, you will not be able to recover this and all the bookings of this user will be deleted!',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        axios
+          .delete(cl(`/users/${id}`), config)
+          .then((data) => {
+            if (data.data.acknowledged) {
+              tr.remove();
+              return swal('The user has been deleted!', {
+                icon: 'success',
+              });
+            }
+            swal("Oop's something went very wrong!", 'error');
+          })
+          .catch(() => {
+            swal("Oop's something went very wrong!", 'error');
+          })
+          .finally(() => {
+            tr.classList.remove('opacity-50');
+            button.disabled = false;
+          });
+      } else {
+        tr.classList.remove('opacity-50');
+        button.disabled = false;
+      }
+    });
   };
 
   useEffect(() => {
