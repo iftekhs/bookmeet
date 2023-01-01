@@ -5,6 +5,15 @@ import { cl, config } from '../../../Helpers/Helpers';
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
 
+  const handleDelete = (event, id) => {
+    const button = event.target;
+    const tr = button.parentNode.parentNode;
+    tr.classList.add('opacity-50');
+    button.disabled = true;
+
+    
+  };
+
   useEffect(() => {
     axios.get(cl('/users'), config).then((data) => setUsers(data.data));
   }, []);
@@ -41,7 +50,9 @@ const AdminUsers = () => {
                   <td className="py-4 px-6">{user.name}</td>
                   <td className="py-4 px-6">{user.email}</td>
                   <td className="py-4 px-6">
-                    <button className="bg-rose-500 text-white px-5 py-2 rounded-full">
+                    <button
+                      onClick={(event) => handleDelete(event, user._id)}
+                      className="bg-rose-500 text-white px-5 py-2 rounded-full">
                       Delete
                     </button>
                   </td>
