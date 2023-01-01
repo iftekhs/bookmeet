@@ -2,11 +2,13 @@ import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
+import setAuthToken from '../../api/Auth/Auth';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import { cl } from '../../Helpers/Helpers';
 import './SignIn.css';
 
 const SignIn = () => {
-  const { login, providerLogin, setLoading } = useContext(AuthContext);
+  const { login, providerLogin, setLoading, trigger, setTrigger } = useContext(AuthContext);
   const [error, setError] = useState(null);
 
   const location = useLocation();
@@ -26,8 +28,19 @@ const SignIn = () => {
     const password = form.password.value;
 
     login(email, password)
-      .then(() => {
-        navigate(from, { replace: true });
+      .then((result) => {
+        const user = result.user;
+        const currentUser = {
+          email: user.email,
+        };
+        setAuthToken(currentUser)
+          .then((data) => {
+            setTrigger(!trigger);
+            if (data.accessToken) {
+              navigate(from, { replace: true });
+            }
+          })
+          .catch(console.error);
       })
       .catch((error) => {
         setError(error.message);
@@ -40,13 +53,35 @@ const SignIn = () => {
   const handleGoogleSignIn = () => {
     providerLogin(googleProvider)
       .then((result) => {
-        // const user = result.user;
-        // const currentUser = {
-        //   email: user.email,
-        // };
-        navigate(from, { replace: true });
+        const user = result.user;
+        saveUser(user.displayName, user.email, 'user');
       })
       .catch(console.error);
+  };
+
+  const saveUser = (name, email) => {
+    const user = { name, email };
+    const currentUser = {
+      email,
+    };
+    fetch(cl('/users'), {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then(() => {
+        setAuthToken(currentUser)
+          .then((data) => {
+            setTrigger(!trigger);
+            if (data.accessToken) {
+              navigate('/');
+            }
+          })
+          .catch(console.error);
+      });
   };
 
   return (

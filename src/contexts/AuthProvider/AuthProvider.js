@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
       if (localStorage.getItem('token-' + process.env.REACT_APP_NAME)) {
         setUser(currentUser);
       } else {
-        logOut();
+        setUser(null);
       }
       setLoading(false);
     });

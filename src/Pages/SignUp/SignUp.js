@@ -23,7 +23,6 @@ const SignUp = () => {
     };
     updateUserProfile(profile)
       .then(() => {
-        setTrigger(!trigger);
         saveUser(name, email);
       })
       .catch((error) => console.error(error))
@@ -72,6 +71,7 @@ const SignUp = () => {
       .then(() => {
         setAuthToken(currentUser)
           .then((data) => {
+            setTrigger(!trigger);
             if (data.accessToken) {
               navigate('/');
             }

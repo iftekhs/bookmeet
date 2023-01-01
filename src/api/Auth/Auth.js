@@ -1,5 +1,4 @@
-import { cl } from "../../Helpers/Helpers";
-
+import { cl } from '../../Helpers/Helpers';
 
 const setAuthToken = async (user) => {
   return fetch(cl(`/jwt`), {
