@@ -1,15 +1,26 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { cl } from '../../../Helpers/Helpers';
 
 const AdminDashboard = () => {
+  const [totalUsers, setTotalUsers] = useState(0);
 
-
-  
+  // ------------------------ Get total users count -----------------------------------
+  useEffect(() => {
+    const config = {
+      headers: {
+        authorization: `Bearer ` + localStorage.getItem('token-' + process.env.REACT_APP_NAME),
+      },
+    };
+    axios.get(cl('/users/count'), config).then((data) => setTotalUsers(data.data.count));
+  }, []);
+  // ------------------------ Get total users count -----------------------------------
   return (
     <section id="stat-cards">
       <div className="flex gap-10">
         <div className="w-72 bg-gradient-to-tr from-blue-500 to-blue-400 rounded px-3 py-4 text-white">
           <h2 className="text-1xl">Total Users</h2>
-          <p className="text-3xl font-semibold">65</p>
+          <p className="text-3xl font-semibold">{totalUsers}</p>
         </div>
         <div className="w-72 bg-gradient-to-tr from-blue-500 to-blue-400 rounded px-3 py-4 text-white">
           <h2 className="text-1xl">Total Meetings</h2>
