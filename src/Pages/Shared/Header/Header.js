@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import LinkButton from '../LinkButton/LinkButton';
 import Avatar from '../../../images/avatar.svg';
+import useRole from '../../../hooks/useRole';
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [userRole] = useRole(user?.email);
+  console.log(userRole);
   return (
     <nav className="py-4 px-2 border fixed top-0 w-full bg-white">
       <div className="container mx-auto">
@@ -21,12 +24,14 @@ const Header = () => {
             <li className="hover:text-blue-400 transition-all">
               <Link to="/">Home</Link>
             </li>
-            {user && user.uid && (
-              <>
-                <li className="hover:text-blue-400 transition-all">
-                  <Link to="/">Dashboard</Link>
-                </li>
-              </>
+            {user && user.uid && userRole === 'admin' ? (
+              <li className="hover:text-blue-400 transition-all">
+                <Link to="/admin/dashboard">Dashboard</Link>
+              </li>
+            ) : (
+              <li className="hover:text-blue-400 transition-all">
+                <Link to="/my/dashboard">Dashboard</Link>
+              </li>
             )}
           </ul>
           {user && user.uid ? (

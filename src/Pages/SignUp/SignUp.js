@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { FaGoogle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +10,8 @@ const SignUp = () => {
   const [error, setError] = useState(null);
   const { createUser, providerLogin, trigger, setTrigger, updateUserProfile } =
     useContext(AuthContext);
+
+  const formRef = useRef();
 
   const navigate = useNavigate();
 
@@ -40,7 +42,6 @@ const SignUp = () => {
 
     createUser(email, password)
       .then((result) => {
-        form.reset();
         handleUpdateUserProfile(name, email, photoURL);
       })
       .catch((e) => setError(e.message));
@@ -71,6 +72,7 @@ const SignUp = () => {
       .then(() => {
         setAuthToken(currentUser)
           .then((data) => {
+            formRef.current.reset();
             setTrigger(!trigger);
             if (data.accessToken) {
               navigate('/');
@@ -84,7 +86,7 @@ const SignUp = () => {
     <section className="bg-gradient-to-tr from-blue-400 to-blue-500 px-2">
       <div className="mh-100  flex items-center justify-center">
         <div className="auth-form bg-white flex items-center justify-center flex-col w-full rounded p-4 max-w-2xl">
-          <form onSubmit={handleSubmit}>
+          <form ref={formRef} onSubmit={handleSubmit}>
             <h2 className="text-4xl text-center font-bold">
               Book
               <span className="text-blue-500">Meet</span>
