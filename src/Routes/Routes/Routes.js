@@ -6,6 +6,7 @@ import AdminUsers from '../../Pages/Admin/AdminUsers/AdminUsers';
 import Home from '../../Pages/Home/Home';
 import SignIn from '../../Pages/SignIn/SignIn';
 import SignUp from '../../Pages/SignUp/SignUp';
+import AdminRoute from '../AdminRoute/AdminRoute';
 
 const routes = createBrowserRouter([
   {
@@ -28,7 +29,11 @@ const routes = createBrowserRouter([
   },
   {
     path: '/admin',
-    element: <Admin></Admin>,
+    element: (
+      <AdminRoute>
+        <Admin></Admin>
+      </AdminRoute>
+    ),
     children: [
       {
         path: '/admin/dashboard',
