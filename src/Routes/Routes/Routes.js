@@ -1,12 +1,15 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Admin from '../../Layouts/Admin/Admin';
 import Main from '../../Layouts/Main/Main';
+import User from '../../Layouts/User/User';
 import AdminDashboard from '../../Pages/Admin/AdminDashboard/AdminDashboard';
 import AdminUsers from '../../Pages/Admin/AdminUsers/AdminUsers';
 import Home from '../../Pages/Home/Home';
 import SignIn from '../../Pages/SignIn/SignIn';
 import SignUp from '../../Pages/SignUp/SignUp';
+import UserMeetings from '../../Pages/User/UserMeetings/UserMeetings';
 import AdminRoute from '../AdminRoute/AdminRoute';
+import UserRoute from '../UserRoute/UserRoute';
 
 const routes = createBrowserRouter([
   {
@@ -42,6 +45,20 @@ const routes = createBrowserRouter([
       {
         path: '/admin/users',
         element: <AdminUsers></AdminUsers>,
+      },
+    ],
+  },
+  {
+    path: '/my',
+    element: (
+      <UserRoute>
+        <User></User>
+      </UserRoute>
+    ),
+    children: [
+      {
+        path: '/my/meetings',
+        element: <UserMeetings></UserMeetings>,
       },
     ],
   },

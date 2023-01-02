@@ -4,7 +4,7 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import useRole from '../../hooks/useRole';
 import Loader from '../../Pages/Shared/Loader/Loader';
 
-const AdminRoute = ({ children }) => {
+const UserRoute = ({ children }) => {
   const { user, loading, logOut } = useContext(AuthContext);
   const [userRole, userRoleLoading] = useRole(user?.email);
   const location = useLocation();
@@ -13,7 +13,7 @@ const AdminRoute = ({ children }) => {
     return <Loader></Loader>;
   }
 
-  if (user && userRole === 'admin') {
+  if (user && userRole === 'user') {
     return children;
   }
 
@@ -21,4 +21,4 @@ const AdminRoute = ({ children }) => {
   return <Navigate to="/signin" state={{ from: location }} replace></Navigate>;
 };
 
-export default AdminRoute;
+export default UserRoute;
