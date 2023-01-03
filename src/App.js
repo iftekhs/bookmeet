@@ -5,7 +5,7 @@ import routes from './Routes/Routes/Routes';
 function App() {
   return (
     <div className="text-slate-900">
-      <RouterProvider router={routes}></RouterProvider>;
+      <RouterProvider router={routes}></RouterProvider>
     </div>
   );
 }
