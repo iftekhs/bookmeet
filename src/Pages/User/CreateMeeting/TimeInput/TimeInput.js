@@ -4,14 +4,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { BsTrash } from 'react-icons/bs';
 import React, { useState } from 'react';
 
-const TimeInput = ({
-  index,
-  initialStartTime,
-  initialEndTime,
-  updateSlot,
-  removeSlot,
-  setTimeError,
-}) => {
+const TimeInput = ({ index, initialStartTime, initialEndTime, updateSlot, removeSlot }) => {
   const [startTime, setStartTime] = useState(initialStartTime);
   const [endTime, setEndTime] = useState(initialEndTime);
 

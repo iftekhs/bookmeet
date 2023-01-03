@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import dayjs from 'dayjs';
 import TextField from '@mui/material/TextField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -8,19 +8,11 @@ import TimeInput from './TimeInput/TimeInput';
 import { AiOutlinePlus } from 'react-icons/ai';
 
 const CreateMeeting = () => {
-  // title
-  // description
-  // startDate
-  // endDate
-  // futureDates
-  // slots
-  // code
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [customDateRange, setCustomDateRange] = useState(false);
   const [customSlots, setCustomSlots] = useState(false);
-  const [dateError, setDateError] = useState(false);
-  const [timeError, setTimeError] = useState(false);
+
   const [slots, setSlots] = useState([
     {
       startTime: null,
@@ -50,32 +42,34 @@ const CreateMeeting = () => {
     const description = form.description.value;
     const futureDates = !customDateRange;
     const timeSlots = customSlots ? slots : [];
+
     const meeting = {
       title,
       description,
       futureDates,
       slots: timeSlots,
     };
+
     if (customDateRange) {
-      if (!startDate || !endDate) {
-        console.log('date range required');
+      if (!startDate || !endDate || dayjs(startDate).isAfter(endDate)) {
         return false;
       }
     }
     if (customSlots) {
-      let isEmpty = false;
+      let hasError = false;
       slots.map((slot) => {
-        if (!slot.startTime || !slot.endTime) {
-          isEmpty = true;
+        if (!slot.startTime || !slot.endTime || dayjs(slot.startTime).isAfter(slot.endTime)) {
+          return (hasError = true);
         }
+        slot.startTime = slot.startTime.toString();
+        slot.endTime = slot.endTime.toString();
         return true;
       });
-      if (isEmpty) {
+      if (hasError) {
         return false;
       }
     }
 
-    console.log('passed');
     console.log(meeting);
   };
 
@@ -134,7 +128,6 @@ const CreateMeeting = () => {
                     }}
                     minDate={dayjs()}
                     renderInput={(params) => <TextField {...params} />}
-                    onError={() => setDateError(true)}
                   />
                 </LocalizationProvider>
               </div>
@@ -149,7 +142,6 @@ const CreateMeeting = () => {
                     }}
                     minDate={startDate?.add(1, 'day') || dayjs()}
                     renderInput={(params) => <TextField {...params} />}
-                    onError={() => setDateError(true)}
                   />
                 </LocalizationProvider>
               </div>
@@ -190,8 +182,7 @@ const CreateMeeting = () => {
                     initialStartTime={slot.startTime}
                     initialEndTime={slot.endTime}
                     updateSlot={updateSlot}
-                    removeSlot={removeSlot}
-                    setTimeError={setTimeError}></TimeInput>
+                    removeSlot={removeSlot}></TimeInput>
                 ))}
               </div>
             </div>
