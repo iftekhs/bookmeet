@@ -7,6 +7,7 @@ import AdminUsers from '../../Pages/Admin/AdminUsers/AdminUsers';
 import Home from '../../Pages/Home/Home';
 import SignIn from '../../Pages/SignIn/SignIn';
 import SignUp from '../../Pages/SignUp/SignUp';
+import CreateMeeting from '../../Pages/User/CreateMeeting/CreateMeeting';
 import UserMeetings from '../../Pages/User/UserMeetings/UserMeetings';
 import AdminRoute from '../AdminRoute/AdminRoute';
 import UserRoute from '../UserRoute/UserRoute';
@@ -59,6 +60,10 @@ const routes = createBrowserRouter([
       {
         path: '/my/meetings',
         element: <UserMeetings></UserMeetings>,
+      },
+      {
+        path: '/my/create-meeting',
+        element: <CreateMeeting></CreateMeeting>,
       },
     ],
   },

@@ -127,7 +127,7 @@ const SignUp = () => {
             <div className="flex flex-col mt-5 w-full">
               <label htmlFor="password">Password</label>
               <input
-                name="passwords"
+                name="password"
                 type="password"
                 required
                 id="password"
