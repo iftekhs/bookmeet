@@ -30,6 +30,11 @@ const CreateMeeting = () => {
     setSlots([...slots, { startTime: null, endTime: null }]);
   };
 
+  const removeSlot = (index) => {
+    const rest = slots.filter((item, idx) => idx !== index);
+    setSlots(rest);
+  };
+
   return (
     <section id="create-meeting">
       <h2 className="text-2xl font-semibold">Create a meeting</h2>
@@ -132,7 +137,9 @@ const CreateMeeting = () => {
                   <TimeInput
                     key={index}
                     initialStartTime={slot.startTime}
-                    initialEndTime={slot.endTime}></TimeInput>
+                    initialEndTime={slot.endTime}
+                    removeSlot={removeSlot}
+                    index={index}></TimeInput>
                 ))}
               </div>
             </div>

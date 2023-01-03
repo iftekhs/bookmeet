@@ -1,14 +1,15 @@
 import { TextField } from '@mui/material';
 import { LocalizationProvider, TimePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { CiTrash } from 'react-icons/ci';
 import React, { useState } from 'react';
 
-const TimeInput = ({ initialStartTime, initialEndTime }) => {
+const TimeInput = ({ initialStartTime, initialEndTime, index, removeSlot }) => {
   const [startTime, setStartTime] = useState(initialStartTime);
   const [endTime, setEndTime] = useState(initialEndTime);
 
   return (
-    <div className="flex gap-3">
+    <div className="flex items-center gap-3">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <TimePicker
           label="Start Date"
@@ -30,6 +31,13 @@ const TimeInput = ({ initialStartTime, initialEndTime }) => {
           renderInput={(params) => <TextField {...params} />}
         />
       </LocalizationProvider>
+      <div>
+        <button
+          onClick={() => removeSlot(index)}
+          className="inline-block  rounded p-2 bg-rose-500 hover:bg-rose-600 text-2xl transition-all">
+          <CiTrash className="text-white"></CiTrash>
+        </button>
+      </div>
     </div>
   );
 };
