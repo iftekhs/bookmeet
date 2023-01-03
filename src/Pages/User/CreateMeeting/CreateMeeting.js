@@ -6,19 +6,24 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers';
 import TimeInput from './TimeInput/TimeInput';
 import { AiOutlinePlus } from 'react-icons/ai';
+import axios from 'axios';
+import { cl, config } from '../../../Helpers/Helpers';
+import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom';
 
 const CreateMeeting = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [customDateRange, setCustomDateRange] = useState(false);
   const [customSlots, setCustomSlots] = useState(false);
-
   const [slots, setSlots] = useState([
     {
       startTime: null,
       endTime: null,
     },
   ]);
+
+  const navigate = useNavigate();
 
   const addSlot = () => {
     setSlots([...slots, { startTime: null, endTime: null }]);
@@ -41,11 +46,120 @@ const CreateMeeting = () => {
     const title = form.title.value;
     const description = form.description.value;
     const futureDates = !customDateRange;
-    const timeSlots = customSlots ? slots : [];
+    const timeSlots = customSlots
+      ? slots
+      : [
+          {
+            startTime: 'Tue, 03 Jan 2023 18:00:00 GMT',
+            endTime: 'Tue, 03 Jan 2023 18:30:00 GMT',
+          },
+          {
+            startTime: 'Tue, 03 Jan 2023 18:30:00 GMT',
+            endTime: 'Tue, 03 Jan 2023 19:00:00 GMT',
+          },
+          {
+            startTime: 'Tue, 03 Jan 2023 19:30:00 GMT',
+            endTime: 'Tue, 03 Jan 2023 20:00:00 GMT',
+          },
+          {
+            startTime: 'Tue, 03 Jan 2023 20:30:00 GMT',
+            endTime: 'Tue, 03 Jan 2023 21:00:00 GMT',
+          },
+          {
+            startTime: 'Tue, 03 Jan 2023 21:30:00 GMT',
+            endTime: 'Tue, 03 Jan 2023 22:00:00 GMT',
+          },
+          {
+            startTime: 'Tue, 03 Jan 2023 22:30:00 GMT',
+            endTime: 'Tue, 03 Jan 2023 23:00:00 GMT',
+          },
+          {
+            startTime: 'Tue, 03 Jan 2023 23:30:00 GMT',
+            endTime: 'Wed, 04 Jan 2023 00:00:00 GMT',
+          },
+          {
+            startTime: 'Wed, 04 Jan 2023 00:30:00 GMT',
+            endTime: 'Wed, 04 Jan 2023 01:00:00 GMT',
+          },
+          {
+            startTime: 'Wed, 04 Jan 2023 01:30:00 GMT',
+            endTime: 'Wed, 04 Jan 2023 02:00:00 GMT',
+          },
+          {
+            startTime: 'Wed, 04 Jan 2023 02:30:00 GMT',
+            endTime: 'Wed, 04 Jan 2023 03:00:00 GMT',
+          },
+          {
+            startTime: 'Wed, 04 Jan 2023 03:30:00 GMT',
+            endTime: 'Wed, 04 Jan 2023 04:00:00 GMT',
+          },
+          {
+            startTime: 'Wed, 04 Jan 2023 04:30:00 GMT',
+            endTime: 'Wed, 04 Jan 2023 05:00:00 GMT',
+          },
+          {
+            startTime: 'Wed, 04 Jan 2023 05:30:00 GMT',
+            endTime: 'Wed, 04 Jan 2023 05:59:00 GMT',
+          },
+          {
+            startTime: 'Wed, 04 Jan 2023 06:00:00 GMT',
+            endTime: 'Wed, 04 Jan 2023 06:29:00 GMT',
+          },
+          {
+            startTime: 'Wed, 04 Jan 2023 06:30:00 GMT',
+            endTime: 'Wed, 04 Jan 2023 07:00:00 GMT',
+          },
+          {
+            startTime: 'Wed, 04 Jan 2023 07:30:00 GMT',
+            endTime: 'Wed, 04 Jan 2023 08:00:00 GMT',
+          },
+          {
+            startTime: 'Wed, 04 Jan 2023 08:30:00 GMT',
+            endTime: 'Wed, 04 Jan 2023 09:00:00 GMT',
+          },
+          {
+            startTime: 'Wed, 04 Jan 2023 09:30:00 GMT',
+            endTime: 'Wed, 04 Jan 2023 10:00:00 GMT',
+          },
+          {
+            startTime: 'Wed, 04 Jan 2023 10:30:00 GMT',
+            endTime: 'Wed, 04 Jan 2023 11:00:00 GMT',
+          },
+          {
+            startTime: 'Wed, 04 Jan 2023 11:30:00 GMT',
+            endTime: 'Wed, 04 Jan 2023 12:00:00 GMT',
+          },
+          {
+            startTime: 'Wed, 04 Jan 2023 12:30:00 GMT',
+            endTime: 'Wed, 04 Jan 2023 13:00:00 GMT',
+          },
+          {
+            startTime: 'Wed, 04 Jan 2023 13:30:00 GMT',
+            endTime: 'Wed, 04 Jan 2023 14:00:00 GMT',
+          },
+          {
+            startTime: 'Wed, 04 Jan 2023 14:30:00 GMT',
+            endTime: 'Wed, 04 Jan 2023 15:00:00 GMT',
+          },
+          {
+            startTime: 'Wed, 04 Jan 2023 15:30:00 GMT',
+            endTime: 'Wed, 04 Jan 2023 16:00:00 GMT',
+          },
+          {
+            startTime: 'Wed, 04 Jan 2023 16:30:00 GMT',
+            endTime: 'Wed, 04 Jan 2023 17:00:00 GMT',
+          },
+          {
+            startTime: 'Wed, 04 Jan 2023 17:30:00 GMT',
+            endTime: 'Wed, 04 Jan 2023 17:59:00 GMT',
+          },
+        ];
 
     const meeting = {
       title,
       description,
+      startDate,
+      endDate,
       futureDates,
       slots: timeSlots,
     };
@@ -70,7 +184,30 @@ const CreateMeeting = () => {
       }
     }
 
-    console.log(meeting);
+    axios
+      .post(cl('/meetings'), meeting, config)
+      .then((data) => {
+        console.log(data.data);
+        if (data.data.acknowledged) {
+          form.reset();
+          navigate('/my/meetings');
+          return;
+        }
+        swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: '<a href="">Why do I have this issue?</a>',
+        });
+      })
+      .catch(() => {
+        swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: '<a href="">Why do I have this issue?</a>',
+        });
+      });
   };
 
   return (
@@ -187,6 +324,7 @@ const CreateMeeting = () => {
               </div>
             </div>
           )}
+
           <button className="bg-blue-500 px-4 py-2 rounded text-white hover:bg-blue-600 transition-all mt-5">
             Submit
           </button>

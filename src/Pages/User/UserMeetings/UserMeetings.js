@@ -1,9 +1,18 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { cl, config } from '../../../Helpers/Helpers';
 import Meeting from './Meeting/Meeting';
 
 const UserMeetings = () => {
+  const [meetings, setMeetings] = useState([]);
+  useEffect(() => {
+    axios.get(cl('/meetings'), config).then((data) => setMeetings(data.data));
+  }, []);
+
+  console.log(meetings);
+
   return (
     <section id="meetings">
       <h2 className="text-2xl font-semibold">All Meetings</h2>
@@ -18,15 +27,9 @@ const UserMeetings = () => {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-5">
-          <Meeting
-            title="React Interview"
-            description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor quaerat architecto
-            cupiditate. psum dolor sit amet conse."></Meeting>
-
-          <Meeting
-            title="JavaScript Interview"
-            description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor quaerat architecto
-          cupiditate. psum dolor sit amet conse."></Meeting>
+          {meetings.map((meeting) => (
+            <Meeting key={meeting._id} meeting={meeting}></Meeting>
+          ))}
         </div>
       </div>
     </section>
