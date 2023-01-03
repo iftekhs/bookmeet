@@ -3,7 +3,11 @@ import './App.css';
 import routes from './Routes/Routes/Routes';
 
 function App() {
-  return <RouterProvider router={routes}></RouterProvider>;
+  return (
+    <div className="text-slate-900">
+      <RouterProvider router={routes}></RouterProvider>;
+    </div>
+  );
 }
 
 export default App;

@@ -31,7 +31,7 @@ const Header = () => {
             )}
             {user && user.uid && userRole === 'user' && (
               <li className="hover:text-blue-400 transition-all">
-                <Link to="/my/dashboard">Dashboard</Link>
+                <Link to="/my/meetings">Meetings</Link>
               </li>
             )}
           </ul>
