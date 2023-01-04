@@ -7,7 +7,7 @@ import { DatePicker } from '@mui/x-date-pickers';
 import TimeInput from './TimeInput/TimeInput';
 import { AiOutlinePlus } from 'react-icons/ai';
 import axios from 'axios';
-import { cl, config } from '../../../Helpers/Helpers';
+import { cl, config, showError } from '../../../Helpers/Helpers';
 import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
 
@@ -193,20 +193,10 @@ const CreateMeeting = () => {
           navigate('/my/meetings');
           return;
         }
-        swal({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-          footer: '<a href="">Why do I have this issue?</a>',
-        });
+        showError();
       })
       .catch(() => {
-        swal({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-          footer: '<a href="">Why do I have this issue?</a>',
-        });
+        showError();
       });
   };
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import swal from 'sweetalert';
-import { cl, config } from '../../../Helpers/Helpers';
+import { cl, config, showError } from '../../../Helpers/Helpers';
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
@@ -28,10 +28,10 @@ const AdminUsers = () => {
                 icon: 'success',
               });
             }
-            swal("Oop's something went very wrong!", 'error');
+            showError();
           })
           .catch(() => {
-            swal("Oop's something went very wrong!", 'error');
+            showError();
           })
           .finally(() => {
             tr.classList.remove('opacity-50');
