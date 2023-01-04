@@ -10,9 +10,21 @@ import './BookMeeting.css';
 
 const BookMeeting = () => {
   const { data } = useLoaderData();
-  const { title, description, startDate, endDate } = data;
+  const { _id, title, description, startDate, endDate } = data;
   const [date, setDate] = useState(dayjs());
   const [slots, setSlots] = useState([]);
+  const [selectedSlot, setSelectedSlot] = useState(null);
+
+  useEffect(() => {
+    axios.get(cl(`/meeting/${_id}/slots/${date.toString()}`), config).then((data) => {
+      setSlots(data.data);
+      setSelectedSlot(null);
+    });
+  }, [_id, date]);
+
+  const handleSelect = (index) => {
+    setSelectedSlot(index);
+  };
 
   return (
     <section id="book-meeting">
@@ -40,7 +52,10 @@ const BookMeeting = () => {
               {slots.map((slot, index) => (
                 <button
                   key={index}
-                  className="bg-white px-4 py-2 rounded border-2 border-slate-900">
+                  onClick={() => handleSelect(index)}
+                  className={`bg-white px-4 py-2 rounded border-2 border-slate-900 ${
+                    selectedSlot === index && 'border-blue-500'
+                  }`}>
                   {dayjs(slot.startTime).format('hh:mm A')} -{' '}
                   {dayjs(slot.endTime).format('hh:mm A')}
                 </button>
