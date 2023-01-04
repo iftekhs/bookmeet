@@ -59,7 +59,7 @@ const Meeting = ({ meeting }) => {
           {linkText}
         </button>
         <Link
-          to={`/meeting/${code}`}
+          to={`/meeting/${_id}`}
           className="text-sm whitespace-nowrap bg-blue-500 px-4 py-2 rounded-full text-white hover:bg-blue-600 transition-all">
           View Details
         </Link>

@@ -8,7 +8,6 @@ import TimeInput from './TimeInput/TimeInput';
 import { AiOutlinePlus } from 'react-icons/ai';
 import axios from 'axios';
 import { cl, config, showError } from '../../../Helpers/Helpers';
-import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
 
 const CreateMeeting = () => {

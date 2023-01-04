@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { createBrowserRouter } from 'react-router-dom';
+import { cl, config } from '../../Helpers/Helpers';
 import Admin from '../../Layouts/Admin/Admin';
 import Main from '../../Layouts/Main/Main';
 import User from '../../Layouts/User/User';
@@ -69,8 +71,9 @@ const routes = createBrowserRouter([
     ],
   },
   {
-    path: '/book/:id',
+    path: '/book/:code',
     element: <BookMeeting></BookMeeting>,
+    loader: ({ params }) => axios.get(cl(`/meeting/${params.code}`), config),
   },
 ]);
 
