@@ -4,6 +4,7 @@ import Main from '../../Layouts/Main/Main';
 import User from '../../Layouts/User/User';
 import AdminDashboard from '../../Pages/Admin/AdminDashboard/AdminDashboard';
 import AdminUsers from '../../Pages/Admin/AdminUsers/AdminUsers';
+import BookMeeting from '../../Pages/BookMeeting/BookMeeting';
 import Home from '../../Pages/Home/Home';
 import SignIn from '../../Pages/SignIn/SignIn';
 import SignUp from '../../Pages/SignUp/SignUp';
@@ -66,6 +67,10 @@ const routes = createBrowserRouter([
         element: <CreateMeeting></CreateMeeting>,
       },
     ],
+  },
+  {
+    path: '/book/:id',
+    element: <BookMeeting></BookMeeting>,
   },
 ]);
 
