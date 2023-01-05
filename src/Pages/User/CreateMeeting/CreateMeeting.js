@@ -43,6 +43,7 @@ const CreateMeeting = () => {
     event.preventDefault();
     const form = event.target;
     const title = form.title.value;
+    const link = form.link.value;
     const description = form.description.value;
     const futureDates = !customDateRange;
     const timeSlots = customSlots
@@ -156,6 +157,7 @@ const CreateMeeting = () => {
 
     const meeting = {
       title,
+      link,
       description,
       startDate,
       endDate,
@@ -313,6 +315,16 @@ const CreateMeeting = () => {
               </div>
             </div>
           )}
+          <div className="flex flex-col mt-5 w-full">
+            <label htmlFor="link">Meeting Link</label>
+            <input
+              id="link"
+              name="link"
+              type="text"
+              required
+              className="text-sm p-2 mt-1 rounded focus:border-blue-00 w-full outline-none border"
+            />
+          </div>
 
           <button className="bg-blue-500 px-4 py-2 rounded text-white hover:bg-blue-600 transition-all mt-5">
             Submit

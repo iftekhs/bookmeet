@@ -10,6 +10,7 @@ import BookMeeting from '../../Pages/BookMeeting/BookMeeting';
 import Home from '../../Pages/Home/Home';
 import SignIn from '../../Pages/SignIn/SignIn';
 import SignUp from '../../Pages/SignUp/SignUp';
+import Bookings from '../../Pages/User/Bookings/Bookings';
 import CreateMeeting from '../../Pages/User/CreateMeeting/CreateMeeting';
 import UserMeetings from '../../Pages/User/UserMeetings/UserMeetings';
 import AdminRoute from '../AdminRoute/AdminRoute';
@@ -67,6 +68,10 @@ const routes = createBrowserRouter([
       {
         path: '/my/create-meeting',
         element: <CreateMeeting></CreateMeeting>,
+      },
+      {
+        path: '/my/bookings',
+        element: <Bookings></Bookings>,
       },
     ],
   },
