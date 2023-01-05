@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { cl, config } from '../../../Helpers/Helpers';
+import BookingRow from './BookingRow/BookingRow';
 
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -8,7 +9,6 @@ const Bookings = () => {
   useEffect(() => {
     axios.get(cl('/bookings'), config).then((data) => setBookings(data.data));
   }, []);
-  console.log(bookings);
 
   return (
     <section id="bookings">
@@ -33,22 +33,9 @@ const Bookings = () => {
               </tr>
             </thead>
             <tbody>
-              {/* {users.map((user) => (
-                <tr key={user._id} className="bg-white border-b hover:bg-gray-50">
-                  <td className="py-4 px-6">
-                    <img className="w-10 h-10 rounded-full" src={user.photoURL} alt="" />
-                  </td>
-                  <td className="py-4 px-6">{user.name}</td>
-                  <td className="py-4 px-6">{user.email}</td>
-                  <td className="py-4 px-6">
-                    <button
-                      onClick={(event) => handleDelete(event, user._id)}
-                      className="bg-rose-500 text-white px-5 py-2 rounded-full">
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))} */}
+              {bookings.map((book) => (
+                <BookingRow key={book._id} book={book}></BookingRow>
+              ))}
             </tbody>
           </table>
         </div>
