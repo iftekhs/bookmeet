@@ -25,6 +25,9 @@ const Bookings = () => {
                   Meeting Name
                 </th>
                 <th scope="col" className="py-3 px-6">
+                  Meeting Time
+                </th>
+                <th scope="col" className="py-3 px-6">
                   Meeting Link
                 </th>
                 <th scope="col" className="py-3 px-6">
