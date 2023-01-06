@@ -11,7 +11,6 @@ const UserMeetings = () => {
     axios.get(cl('/meetings'), config).then((data) => setMeetings(data.data));
   }, []);
 
-  console.log(meetings);
 
   return (
     <section id="meetings">
@@ -30,6 +29,7 @@ const UserMeetings = () => {
           {meetings.map((meeting) => (
             <Meeting key={meeting._id} meeting={meeting}></Meeting>
           ))}
+          
         </div>
       </div>
     </section>
