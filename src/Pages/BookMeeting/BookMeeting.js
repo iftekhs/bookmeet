@@ -53,20 +53,17 @@ const BookMeeting = () => {
     };
 
     axios.post(cl('/bookings'), booking, config).then((data) => {
-      // navigate('/my/meetings');
-      console.log(data);
+      navigate('/my/bookings');
     });
   };
 
   const dayjsStartDate = dayjs(new Date(Number(startDate)).toString());
   const dayjsEndDate = dayjs(new Date(Number(endDate)).toString());
 
-  const minDate = startDate
-    ? dayjs().isAfter(dayjsStartDate) || dayjs().isSame(dayjsStartDate)
-      ? dayjsStartDate
-      : dayjs()
-    : null;
+  const minDate = startDate ? (!dayjs().isAfter(dayjsStartDate) ? dayjsStartDate : dayjs()) : null;
   const maxDate = endDate ? dayjsEndDate : null;
+
+  console.log();
 
   return (
     <section id="book-meeting">
@@ -91,26 +88,26 @@ const BookMeeting = () => {
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
-            <div className="slots overflow-auto flex items-center justify-center flex-col gap-4">
-              {slots.length > 0 ? (
-                <>
-                  {slots.map((slot) => (
-                    <button
-                      type="button"
-                      key={slot._id}
-                      onClick={() => handleSelect(slot._id)}
-                      className={`bg-white px-4 py-2 rounded border-2 border-slate-900 ${
-                        selectedSlot === slot._id && 'border-blue-500'
-                      }`}>
-                      {dayjs(slot.startTime).format('hh:mm A')} -{' '}
-                      {dayjs(slot.endTime).format('hh:mm A')}
-                    </button>
-                  ))}
-                </>
-              ) : (
-                <div>No slots avaibale on this date!</div>
-              )}
-            </div>
+            {slots.length > 0 ? (
+              <div className="slots overflow-auto flex flex-col gap-4">
+                {slots.map((slot) => (
+                  <button
+                    type="button"
+                    key={slot._id}
+                    onClick={() => handleSelect(slot._id)}
+                    className={`bg-white px-4 py-2 rounded border-2 border-slate-900 ${
+                      selectedSlot === slot._id && 'border-blue-500'
+                    }`}>
+                    {dayjs(slot.startTime).format('hh:mm A')} -{' '}
+                    {dayjs(slot.endTime).format('hh:mm A')}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <div className="h-72 flex items-center justify-center">
+                No slots avaibale on this date!
+              </div>
+            )}
           </div>
           <p className="text-rose-500 mt-5">{error}</p>
           <div className="flex items-center justify-center">

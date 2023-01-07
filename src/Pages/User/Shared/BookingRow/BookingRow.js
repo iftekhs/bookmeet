@@ -4,14 +4,14 @@ import React, { useEffect, useState } from 'react';
 import swal from 'sweetalert';
 import { cl, config, showError } from '../../../../Helpers/Helpers';
 
-const BookingRow = ({ book }) => {
+const BookingRow = ({ book, isMeetingBooking = false }) => {
   const { _id, meetingId, slot, createdAt } = book;
   const [meeting, setMeeting] = useState();
 
   useEffect(() => {
     axios.get(cl(`/meetings/${meetingId}`), config).then((data) => setMeeting(data.data));
   }, [meetingId]);
-
+  console.log(isMeetingBooking ? `/meeting/booking/${2}` : `/bookings/${2}`);
   const handleDelete = (event, id) => {
     swal({
       title: 'Are you sure?',
@@ -22,7 +22,7 @@ const BookingRow = ({ book }) => {
     }).then((willDelete) => {
       if (willDelete) {
         axios
-          .delete(cl(`/bookings/${id}`), config)
+          .delete(cl(isMeetingBooking ? `/meeting/booking/${id}` : `/bookings/${id}`), config)
           .then((data) => {
             if (data.data.acknowledged) {
               event.target.parentNode.parentNode.remove();
@@ -43,7 +43,8 @@ const BookingRow = ({ book }) => {
     <tr key={_id} className="bg-white border-b hover:bg-gray-50">
       <td className="py-4 px-6">{dayjs(createdAt).format('MMM D YYYY')}</td>
       <td className="py-4 px-6">{meeting?.title}</td>
-      <td className="py-4 px-6">
+      <td className="py-4 px-6 text-center">
+        {dayjs(meeting?.startTime).format('MMM D YYYY')} <br />{' '}
         {dayjs(slot.startTime).format('hh:mm A')} - {dayjs(slot.endTime).format('hh:mm A')}
       </td>
       <td className="py-4 px-6">
