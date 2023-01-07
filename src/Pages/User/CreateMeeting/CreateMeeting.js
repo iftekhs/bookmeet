@@ -46,121 +46,121 @@ const CreateMeeting = () => {
     const link = form.link.value;
     const description = form.description.value;
     const futureDates = !customDateRange;
-    const timeSlots = customSlots
-      ? slots
-      : [
-          {
-            startTime: 'Tue, 03 Jan 2023 18:00:00 GMT',
-            endTime: 'Tue, 03 Jan 2023 18:30:00 GMT',
-          },
-          {
-            startTime: 'Tue, 03 Jan 2023 18:30:00 GMT',
-            endTime: 'Tue, 03 Jan 2023 19:00:00 GMT',
-          },
-          {
-            startTime: 'Tue, 03 Jan 2023 19:30:00 GMT',
-            endTime: 'Tue, 03 Jan 2023 20:00:00 GMT',
-          },
-          {
-            startTime: 'Tue, 03 Jan 2023 20:30:00 GMT',
-            endTime: 'Tue, 03 Jan 2023 21:00:00 GMT',
-          },
-          {
-            startTime: 'Tue, 03 Jan 2023 21:30:00 GMT',
-            endTime: 'Tue, 03 Jan 2023 22:00:00 GMT',
-          },
-          {
-            startTime: 'Tue, 03 Jan 2023 22:30:00 GMT',
-            endTime: 'Tue, 03 Jan 2023 23:00:00 GMT',
-          },
-          {
-            startTime: 'Tue, 03 Jan 2023 23:30:00 GMT',
-            endTime: 'Wed, 04 Jan 2023 00:00:00 GMT',
-          },
-          {
-            startTime: 'Wed, 04 Jan 2023 00:30:00 GMT',
-            endTime: 'Wed, 04 Jan 2023 01:00:00 GMT',
-          },
-          {
-            startTime: 'Wed, 04 Jan 2023 01:30:00 GMT',
-            endTime: 'Wed, 04 Jan 2023 02:00:00 GMT',
-          },
-          {
-            startTime: 'Wed, 04 Jan 2023 02:30:00 GMT',
-            endTime: 'Wed, 04 Jan 2023 03:00:00 GMT',
-          },
-          {
-            startTime: 'Wed, 04 Jan 2023 03:30:00 GMT',
-            endTime: 'Wed, 04 Jan 2023 04:00:00 GMT',
-          },
-          {
-            startTime: 'Wed, 04 Jan 2023 04:30:00 GMT',
-            endTime: 'Wed, 04 Jan 2023 05:00:00 GMT',
-          },
-          {
-            startTime: 'Wed, 04 Jan 2023 05:30:00 GMT',
-            endTime: 'Wed, 04 Jan 2023 05:59:00 GMT',
-          },
-          {
-            startTime: 'Wed, 04 Jan 2023 06:00:00 GMT',
-            endTime: 'Wed, 04 Jan 2023 06:29:00 GMT',
-          },
-          {
-            startTime: 'Wed, 04 Jan 2023 06:30:00 GMT',
-            endTime: 'Wed, 04 Jan 2023 07:00:00 GMT',
-          },
-          {
-            startTime: 'Wed, 04 Jan 2023 07:30:00 GMT',
-            endTime: 'Wed, 04 Jan 2023 08:00:00 GMT',
-          },
-          {
-            startTime: 'Wed, 04 Jan 2023 08:30:00 GMT',
-            endTime: 'Wed, 04 Jan 2023 09:00:00 GMT',
-          },
-          {
-            startTime: 'Wed, 04 Jan 2023 09:30:00 GMT',
-            endTime: 'Wed, 04 Jan 2023 10:00:00 GMT',
-          },
-          {
-            startTime: 'Wed, 04 Jan 2023 10:30:00 GMT',
-            endTime: 'Wed, 04 Jan 2023 11:00:00 GMT',
-          },
-          {
-            startTime: 'Wed, 04 Jan 2023 11:30:00 GMT',
-            endTime: 'Wed, 04 Jan 2023 12:00:00 GMT',
-          },
-          {
-            startTime: 'Wed, 04 Jan 2023 12:30:00 GMT',
-            endTime: 'Wed, 04 Jan 2023 13:00:00 GMT',
-          },
-          {
-            startTime: 'Wed, 04 Jan 2023 13:30:00 GMT',
-            endTime: 'Wed, 04 Jan 2023 14:00:00 GMT',
-          },
-          {
-            startTime: 'Wed, 04 Jan 2023 14:30:00 GMT',
-            endTime: 'Wed, 04 Jan 2023 15:00:00 GMT',
-          },
-          {
-            startTime: 'Wed, 04 Jan 2023 15:30:00 GMT',
-            endTime: 'Wed, 04 Jan 2023 16:00:00 GMT',
-          },
-          {
-            startTime: 'Wed, 04 Jan 2023 16:30:00 GMT',
-            endTime: 'Wed, 04 Jan 2023 17:00:00 GMT',
-          },
-          {
-            startTime: 'Wed, 04 Jan 2023 17:30:00 GMT',
-            endTime: 'Wed, 04 Jan 2023 17:59:00 GMT',
-          },
-        ];
+    const defaultSlots = [
+      {
+        startTime: 1672768800000,
+        endTime: 1672770600000,
+      },
+      {
+        startTime: 1672770600000,
+        endTime: 1672772400000,
+      },
+      {
+        startTime: 1672774200000,
+        endTime: 1672776000000,
+      },
+      {
+        startTime: 1672777800000,
+        endTime: 1672779600000,
+      },
+      {
+        startTime: 1672781400000,
+        endTime: 1672783200000,
+      },
+      {
+        startTime: 1672785000000,
+        endTime: 1672786800000,
+      },
+      {
+        startTime: 1672788600000,
+        endTime: 1672790400000,
+      },
+      {
+        startTime: 1672792200000,
+        endTime: 1672794000000,
+      },
+      {
+        startTime: 1672795800000,
+        endTime: 1672797600000,
+      },
+      {
+        startTime: 1672799400000,
+        endTime: 1672801200000,
+      },
+      {
+        startTime: 1672803000000,
+        endTime: 1672804800000,
+      },
+      {
+        startTime: 1672806600000,
+        endTime: 1672808400000,
+      },
+      {
+        startTime: 1672810200000,
+        endTime: 1672811940000,
+      },
+      {
+        startTime: 1672812000000,
+        endTime: 1672813740000,
+      },
+      {
+        startTime: 1672813800000,
+        endTime: 1672815600000,
+      },
+      {
+        startTime: 1672817400000,
+        endTime: 1672819200000,
+      },
+      {
+        startTime: 1672821000000,
+        endTime: 1672822800000,
+      },
+      {
+        startTime: 1672824600000,
+        endTime: 1672826400000,
+      },
+      {
+        startTime: 1672828200000,
+        endTime: 1672830000000,
+      },
+      {
+        startTime: 1672831800000,
+        endTime: 1672833600000,
+      },
+      {
+        startTime: 1672835400000,
+        endTime: 1672837200000,
+      },
+      {
+        startTime: 1672839000000,
+        endTime: 1672840800000,
+      },
+      {
+        startTime: 1672842600000,
+        endTime: 1672844400000,
+      },
+      {
+        startTime: 1672846200000,
+        endTime: 1672848000000,
+      },
+      {
+        startTime: 1672849800000,
+        endTime: 1672851600000,
+      },
+      {
+        startTime: 1672853400000,
+        endTime: 1672855140000,
+      },
+    ];
+
+    const timeSlots = customSlots ? slots : defaultSlots;
 
     const meeting = {
       title,
       link,
       description,
-      startDate,
-      endDate,
+      startDate: new Date(startDate).getTime(),
+      endDate: new Date(endDate).getTime(),
       futureDates,
       slots: timeSlots,
     };
@@ -176,8 +176,8 @@ const CreateMeeting = () => {
         if (!slot.startTime || !slot.endTime || dayjs(slot.startTime).isAfter(slot.endTime)) {
           return (hasError = true);
         }
-        slot.startTime = slot.startTime.toString();
-        slot.endTime = slot.endTime.toString();
+        slot.startTime = new Date(slot.startTime).getTime();
+        slot.endTime = new Date(slot.endTime).getTime();
         return true;
       });
       if (hasError) {

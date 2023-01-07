@@ -12,6 +12,7 @@ import SignIn from '../../Pages/SignIn/SignIn';
 import SignUp from '../../Pages/SignUp/SignUp';
 import Bookings from '../../Pages/User/Bookings/Bookings';
 import CreateMeeting from '../../Pages/User/CreateMeeting/CreateMeeting';
+import MeetingBookings from '../../Pages/User/MeetingBookings/MeetingBookings';
 import UserMeetings from '../../Pages/User/UserMeetings/UserMeetings';
 import AdminRoute from '../AdminRoute/AdminRoute';
 import UserRoute from '../UserRoute/UserRoute';
@@ -72,6 +73,10 @@ const routes = createBrowserRouter([
       {
         path: '/my/bookings',
         element: <Bookings></Bookings>,
+      },
+      {
+        path: '/my/meeting/:id/bookings',
+        element: <MeetingBookings></MeetingBookings>,
       },
     ],
   },

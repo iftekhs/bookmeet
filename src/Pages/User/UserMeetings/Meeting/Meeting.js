@@ -59,9 +59,9 @@ const Meeting = ({ meeting }) => {
           {linkText}
         </button>
         <Link
-          to={`/meeting/${_id}`}
+          to={`/my/meeting/${_id}/bookings`}
           className="text-sm whitespace-nowrap bg-blue-500 px-4 py-2 rounded-full text-white hover:bg-blue-600 transition-all">
-          View Details
+          Bookings
         </Link>
         <button
           onClick={(event) => handleDelete(event, _id)}

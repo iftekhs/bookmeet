@@ -1,14 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { cl, config } from '../../../Helpers/Helpers';
 import BookingRow from '../Shared/BookingRow/BookingRow';
 
-const Bookings = () => {
+const MeetingBookings = () => {
   const [bookings, setBookings] = useState([]);
-
+  const params = useParams();
   useEffect(() => {
-    axios.get(cl('/bookings'), config).then((data) => setBookings(data.data));
-  }, []);
+    axios.get(cl(`/meeting/${params.id}/bookings`), config).then((data) => setBookings(data.data));
+  }, [params]);
 
   return (
     <section id="bookings">
@@ -47,4 +48,4 @@ const Bookings = () => {
   );
 };
 
-export default Bookings;
+export default MeetingBookings;
