@@ -9,8 +9,8 @@ const Trusted = () => {
     <section className="pt-40 py-20">
       <div className="container mx-auto">
         <div>
-          <h2 className="text-3xl font-semibold text-center">
-            Made meetings online simplified to 120k + customers world wide
+          <h2 className="text-3xl font-semibold text-center leading-relaxed">
+            Made meetings online simplified to <br /> 120k + customers world wide
           </h2>
           <div className="flex flex-wrap items-center justify-center gap-20 mt-10">
             <img className="h-8" src={brand1} alt="" />
