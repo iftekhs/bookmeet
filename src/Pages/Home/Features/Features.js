@@ -28,7 +28,7 @@ const Features = () => {
                 high-value meetings with you."></Feature>
           </div>
           {/* Image */}
-          <div className="sticky top-14">
+          <div className="sticky top-44">
             <img src={featuresImage} alt="" />
           </div>
           {/* Image */}

@@ -8,7 +8,7 @@ const Footer = () => {
           <div className="mb-6 md:mb-0">
             <a href="/" className="flex items-center">
               <span className="self-center text-2xl font-semibold whitespace-nowrap ">
-                BookMeet
+                Book<span className="text-blue-500">Meet</span>
               </span>
             </a>
           </div>
