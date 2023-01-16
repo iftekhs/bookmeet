@@ -10,7 +10,7 @@ const Header = () => {
   const [userRole] = useRole(user?.email);
   console.log(userRole);
   return (
-    <nav className="py-4 px-2 border fixed top-0 w-full bg-white">
+    <nav className="py-4 px-2 border fixed top-0 w-full bg-white z-20">
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
           <Link to="/">
