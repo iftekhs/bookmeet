@@ -8,7 +8,6 @@ import useRole from '../../../hooks/useRole';
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const [userRole] = useRole(user?.email);
-  console.log(userRole);
   return (
     <nav className="py-4 px-2 border fixed top-0 w-full bg-white z-20">
       <div className="container mx-auto">
