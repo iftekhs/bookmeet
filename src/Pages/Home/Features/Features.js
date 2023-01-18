@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import fi1 from '../../../images/feature-1.webp';
 import fi2 from '../../../images/feature-2.webp';
 import fi3 from '../../../images/feature-3.webp';

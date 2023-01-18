@@ -10,6 +10,7 @@ import './SignIn.css';
 const SignIn = () => {
   const { login, providerLogin, setLoading, trigger, setTrigger } = useContext(AuthContext);
   const [error, setError] = useState(null);
+  const [showDemo, setShowDemo] = useState(null);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -84,6 +85,10 @@ const SignIn = () => {
       });
   };
 
+  const toggleDemo = () => {
+    setShowDemo(!showDemo);
+  };
+
   return (
     <section className="bg-gradient-to-tr from-blue-400 to-blue-500 px-2">
       <div className="mh-100  flex items-center justify-center">
@@ -115,7 +120,7 @@ const SignIn = () => {
               />
             </div>
             <p className="text-rose-500 my-5">{error}</p>
-            <button className="mt-5 bg-blue-500 px-4 py-2 rounded text-white hover:bg-blue-600 transition-all">
+            <button className="mt-2 bg-blue-500 px-4 py-2 rounded text-white hover:bg-blue-600 transition-all">
               Sign In
             </button>
 
@@ -125,6 +130,28 @@ const SignIn = () => {
               <FaGoogle></FaGoogle>
               Sign In using Google
             </button>
+            <button
+              type="button"
+              className="mt-3 bg-blue-500 px-4 py-2 rounded text-white hover:bg-blue-600 transition-all"
+              onClick={toggleDemo}>
+              Demo Sign In
+            </button>
+            {showDemo && (
+              <>
+                <div className="mt-5 border rounded p-6">
+                  <h2 className="text-1xl fond-semibold">User Demo Sign In</h2>
+                  <hr />
+                  <p>Email: user@email.com</p>
+                  <p>Password: password</p>
+                </div>
+                <div className="mt-2 border rounded p-6">
+                  <h2 className="text-1xl fond-semibold">Admin Demo Sign In</h2>
+                  <hr />
+                  <p>Email: admin@email.com</p>
+                  <p>Password: password</p>
+                </div>
+              </>
+            )}
           </form>
         </div>
       </div>

@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import useRole from '../../../hooks/useRole';
 import banner from '../../../images/banner.jpg';
 import './Hero.css';
 
 const Hero = () => {
+  const { user } = useContext(AuthContext);
+  const [userRole] = useRole(user?.email);
+
+  const getStartedLink =
+    user && user.uid && userRole === 'admin'
+      ? '/admin/dashboard'
+      : userRole === 'user'
+      ? '/my/meetings'
+      : '/login';
+
   return (
     <section className="pt-20 lg:pt-48 text-center lg:text-left">
       <div className="container mx-auto">
@@ -17,9 +30,11 @@ const Hero = () => {
               example cancling meeting, rescheduling meeting etc.
             </p>
             <div className="mt-5">
-              <button className="bg-blue-500 px-4 py-2 rounded text-white hover:bg-blue-600 transition-all">
-                Get Started
-              </button>
+              <Link to={getStartedLink}>
+                <button className="bg-blue-500 px-4 py-2 rounded text-white hover:bg-blue-600 transition-all">
+                  Get Started
+                </button>
+              </Link>
             </div>
           </div>
           <img className="lg:w-1/2 rounded" src={banner} alt="" />
